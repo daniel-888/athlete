@@ -2,8 +2,8 @@ const moongose = require("mongoose");
 
 const db =
   process.env.mongoURI ||
-  "mongodb://Mike:password@localhost:27019/athlete?authSource=admin";
-// "mongodb+srv://DreamDevFast:dream.dev1215@cluster0.79xlk.mongodb.net/?retryWrites=true&w=majority";
+  // "mongodb://Mike:password@localhost:27019/athlete?authSource=admin";
+  "mongodb+srv://DreamDevFast:dream.dev1215@cluster0.79xlk.mongodb.net/?retryWrites=true&w=majority";
 const Sport = require("../models/Sport");
 
 const connectDB = async () => {
