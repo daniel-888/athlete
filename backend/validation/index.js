@@ -17,7 +17,7 @@ exports.validateLoginInput = (data) => {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   };
 };
 
@@ -68,17 +68,18 @@ exports.validateRegisterInput = (data) => {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   };
 };
 
 exports.validateAthleteCreate = (data) => {
   let errors = {};
+  console.log(data);
 
   data.name = !isEmpty(data.name) ? data.name : "";
-  data.dateOfBirth = !isEmpty(data.dateOfBirth) ? data.dateOfBirth : '';
-  data.location = !isEmpty(data.location) ? data.location : '';
-  data.gender = !isEmpty(data.gender) ? data.gender : '';
+  data.dateOfBirth = !isEmpty(data.dateOfBirth) ? data.dateOfBirth : "";
+  data.location = !isEmpty(data.location) ? data.location : "";
+  data.gender = !isEmpty(data.gender) ? data.gender : "";
 
   data.sports = !isEmpty(data.sports) ? data.sports : [];
 
@@ -94,7 +95,7 @@ exports.validateAthleteCreate = (data) => {
     errors.location = "Please select the location.";
   }
 
-  if (data.gender !== 'Male' && data.gender !== 'Female') {
+  if (data.gender !== "Male" && data.gender !== "Female") {
     errors.gender = "Gender can be Male or Female";
   }
 
@@ -108,6 +109,6 @@ exports.validateAthleteCreate = (data) => {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: isEmpty(errors),
   };
 };

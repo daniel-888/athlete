@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 // material-ui
 import { Button, Box, Step, Stepper, StepLabel, Stack, Typography, Grid } from '@mui/material';
@@ -13,10 +13,10 @@ import SportsForm from './SportsForm';
 import Review from './Review';
 import Preview from './Preview';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import {styled} from "@mui/material/styles";
-import AthleteList from "./athleteList";
-import {useDispatch, useSelector} from "../../store";
-import {getSports} from "store/slices/profile";
+import { styled } from '@mui/material/styles';
+import AthleteList from './athleteList';
+import { useDispatch, useSelector } from '../../store';
+import { getSports } from 'store/slices/profile';
 
 const StepContent = styled('main')(() => ({
     paddingRight: '10px',
@@ -44,27 +44,28 @@ const steps = ['Personal Information', 'Sports Information', 'Summary', 'Profile
 const getStepContent = (step, handleNext, handleBack, personalData, setPersonalData, sportsData, setSportsData, errors) => {
     switch (step) {
         case 0:
-            return (
-              <PersonalForm
-                handleNext={handleNext}
-                personalData={personalData}
-                setPersonalData={setPersonalData}
-                errors={errors}
-              />
-            );
+            return <PersonalForm handleNext={handleNext} personalData={personalData} setPersonalData={setPersonalData} errors={errors} />;
         case 1:
             return (
-              <SportsForm
-                handleNext={handleNext}
-                handleBack={handleBack}
-                personalData={personalData}
-                sportsData={sportsData}
-                setSportsData={setSportsData}
-                errors={errors}
-              />
+                <SportsForm
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    personalData={personalData}
+                    sportsData={sportsData}
+                    setSportsData={setSportsData}
+                    errors={errors}
+                />
             );
         case 2:
-            return <Review handleNext={handleNext} handleBack={handleBack} errors={errors} personalData={personalData} sportsData={sportsData} />;
+            return (
+                <Review
+                    handleNext={handleNext}
+                    handleBack={handleBack}
+                    errors={errors}
+                    personalData={personalData}
+                    sportsData={sportsData}
+                />
+            );
         case 3:
             return <Preview handleNext={handleNext} />;
         default:
@@ -83,14 +84,12 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
     justifyContent: 'center',
     alignItems: 'center',
     ...(ownerState.active && {
-        backgroundImage:
-          `linear-gradient( 136deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary[800]} 50%, ${theme.palette.secondary.dark} 100%)`,
-        boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+        backgroundImage: `linear-gradient( 136deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary[800]} 50%, ${theme.palette.secondary.dark} 100%)`,
+        boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)'
     }),
     ...(ownerState.completed && {
-        backgroundImage:
-          `linear-gradient( 136deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary[800]} 50%, ${theme.palette.secondary.dark} 100%)`,
-    }),
+        backgroundImage: `linear-gradient( 136deg, ${theme.palette.secondary.main} 0%, ${theme.palette.secondary[800]} 50%, ${theme.palette.secondary.dark} 100%)`
+    })
 }));
 
 function ColorlibStepIcon(props) {
@@ -104,9 +103,9 @@ function ColorlibStepIcon(props) {
     };
 
     return (
-      <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
-          {icons[String(props.icon)]}
-      </ColorlibStepIconRoot>
+        <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+            {icons[String(props.icon)]}
+        </ColorlibStepIconRoot>
     );
 }
 
@@ -121,11 +120,11 @@ const ValidationWizard = () => {
         gender: 'Male'
     });
     const [sportsData, setSportsData] = React.useState({});
-    const { error } = useSelector(state => state.profile);
+    const { error } = useSelector((state) => state.profile);
 
     useEffect(() => {
-        dispatch(getSports())
-    }, [])
+        dispatch(getSports());
+    }, []);
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -136,55 +135,58 @@ const ValidationWizard = () => {
     };
 
     return (
-      <Grid container item>
-          <Grid item xs={12} md={3}>
-              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} orientation={matches ? "vertical" : "horizontal"}>
-                  {steps.map((label) => {
-                      return (
-                        <Step key={label}>
-                            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-                        </Step>
-                      );
-                  })}
-              </Stepper>
-          </Grid>
-          <Grid item xs={12} md={9}>
-              {activeStep === steps.length ? (
-                <StepContent>
-                    <AthleteList />
-                    <Stack direction="row" justifyContent="flex-end">
-                        <AnimateButton>
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={() => {
-                                  setPersonalData({});
-                                  setSportsData({});
-                                  setActiveStep(0);
-                              }}
-                              sx={{ my: 3, ml: 1 }}
-                            >
-                                Init Form
-                            </Button>
-                        </AnimateButton>
-                    </Stack>
-                </StepContent>
-              ) : (
-                <StepContent>
-                    {getStepContent(
-                      activeStep,
-                      handleNext,
-                      handleBack,
-                      personalData,
-                      setPersonalData,
-                      sportsData,
-                      setSportsData,
-                      error
-                    )}
-                </StepContent>
-              )}
-          </Grid>
-      </Grid>
+        <Grid container item>
+            <Grid item xs={12} md={3}>
+                <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }} orientation={matches ? 'vertical' : 'horizontal'}>
+                    {steps.map((label) => {
+                        return (
+                            <Step key={label}>
+                                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+            </Grid>
+            <Grid item xs={12} md={9}>
+                {activeStep === steps.length ? (
+                    <StepContent>
+                        <AthleteList />
+                        <Stack direction="row" justifyContent="flex-end">
+                            <AnimateButton>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => {
+                                        setPersonalData({
+                                            gender: 'Male',
+                                            dateOfBirth: Date.now()
+                                        });
+                                        setSportsData({});
+                                        setActiveStep(0);
+                                    }}
+                                    sx={{ my: 3, ml: 1 }}
+                                >
+                                    Init Form
+                                </Button>
+                            </AnimateButton>
+                        </Stack>
+                    </StepContent>
+                ) : (
+                    <StepContent>
+                        {getStepContent(
+                            activeStep,
+                            handleNext,
+                            handleBack,
+                            personalData,
+                            setPersonalData,
+                            sportsData,
+                            setSportsData,
+                            error
+                        )}
+                    </StepContent>
+                )}
+            </Grid>
+        </Grid>
     );
 };
 

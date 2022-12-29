@@ -21,7 +21,7 @@ import DefaultUserIcon from "../../assets/images/auth/default.png";
 
 const FollowerCard = (follower) => {
     const theme = useTheme();
-    const avatarProfile = follower?.profile.avatar ? 'http://localhost:5000/upload/avatar/'+follower?.profile?.avatar : DefaultUserIcon;
+    const avatarProfile = follower?.profile.avatar ? '/upload/avatar/'+follower?.profile?.avatar : DefaultUserIcon;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {

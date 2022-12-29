@@ -95,8 +95,8 @@ const MessageWrapper = styled(Button)({
 
 const PostingCard = ({ avatar, title, post, author, description, own, ...other }) => {
     const theme = useTheme();
-    const postImage = post ? 'http://localhost:5000/upload/posting/'+post : DefaultPostingIcon;
-    const avatarImage = avatar ? 'http://localhost:5000/upload/avatar/'+avatar : DefaultUserIcon;
+    const postImage = post ? '/upload/posting/'+post : DefaultPostingIcon;
+    const avatarImage = avatar ? '/upload/avatar/'+avatar : DefaultUserIcon;
 
     return (
       <Card

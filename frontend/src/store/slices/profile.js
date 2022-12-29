@@ -69,18 +69,13 @@ export function getSports() {
 export function createAthlete(data, afterAction) {
     return async () => {
         try {
-            const response = await axios.post('/athlete/save', data, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            });
+            const response = await axios.post('/athlete/save', data);
             afterAction();
             dispatch(profile.actions.createAthleteSuccess(response.data));
-        }
-        catch(err) {
+        } catch (err) {
             dispatch(profile.actions.hasError(err));
         }
-    }
+    };
 }
 
 export function getList(afterAction) {
@@ -88,10 +83,9 @@ export function getList(afterAction) {
         try {
             const response = await axios.get('/athlete/list');
             dispatch(profile.actions.getListSuccess(response.data));
-            afterAction()
+            afterAction();
+        } catch (err) {
+            dispatch(profile.actions.hasError(err));
         }
-        catch(err) {
-            dispatch(profile.actions.hasError(err))
-        }
-    }
+    };
 }
